@@ -1,21 +1,19 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { View, Text } from 'react-native';
 import { Icon } from 'react-native-elements';
 
 import Style from './styles';
 
-import Context from '../../context';
+import Constants from '../../constants';
 
 const Select = () => {
-    const Constants = useContext(Context);
-
     const [displayOption, setDisplayOption] = useState(false);
     const [selectedOption, setSelectedOption] = useState(Constants.currencies[0]);
 
     const Option = (props) => {
         const [style, setStyle] = useState({
             optionStyle: Style.option,
-            textColor: '#FFFFFF',
+            textColor: Constants.theme.white,
         });
 
         return (
@@ -24,13 +22,13 @@ const Select = () => {
                 onTouchStart={() => {
                     setStyle({
                         optionStyle: Style.optionTouched,
-                        textColor: '#676CFB',
+                        textColor: Constants.theme.primary,
                     });
                 }}
                 onTouchEnd={() => {
                     setStyle({
                         optionStyle: Style.option,
-                        textColor: '#FFFFFF',
+                        textColor: Constants.theme.white,
                     });
                     setSelectedOption(Constants.currencies.filter(currency => currency.code === props.code)[0]);
                     setDisplayOption(false);
@@ -48,7 +46,7 @@ const Select = () => {
                 onTouchStart={() => { setDisplayOption(!displayOption) }}
             >
                 <View style={Style.inputTitle}>
-                    <Text style={{color: '#FFFFFF'}}>{`${selectedOption.code} - ${selectedOption.name}`}</Text>
+                    <Text style={{color: Constants.theme.white}}>{`${selectedOption.code} - ${selectedOption.name}`}</Text>
                 </View>
                 
                 <View style={Style.inputDivisor}/>
@@ -56,7 +54,7 @@ const Select = () => {
                 <View
                     style={Style.inputListIcon}
                 >
-                    <Icon name='expand-more' color='#FFFFFF' />
+                    <Icon name='expand-more' color={Constants.theme.white} />
                 </View>
             </View>
             { 

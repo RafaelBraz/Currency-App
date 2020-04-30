@@ -1,14 +1,13 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FlatList, View, Text } from 'react-native';
 
 import Title from '../../components/title';
 import QuoteBlock from '../../components/quote-block';
 
-import Context from '../../context';
+import Constants from '../../constants';
 
 const Quote = () => {
     const [favoriteList, setFavoriteList] = useState([{title: true, code: '#'}]);
-    const Constants = useContext(Context);
 
     useEffect(() => {
         const favorites = Constants.currencies.filter( currency => Constants.favorites.includes(currency.code) );
@@ -37,7 +36,7 @@ const Quote = () => {
                     alignSelf: 'center',
                     textAlign: 'center',
                     fontSize: 18,
-                    color: '#888888',
+                    color: Constants.theme.gray,
                 }}>
                     {`Você ainda não adicionou\nnenhuma moeda aos favoritos`}
                 </Text>

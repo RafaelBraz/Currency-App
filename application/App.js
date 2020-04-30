@@ -4,19 +4,21 @@ import React, { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
-import Quote from './src/pages/quote/';
-import Conversor from './src/pages/conversor';
-import Analytic from './src/pages/analytic';
+import Quote from './src/Frontend/pages/quote';
+import Conversor from './src/Frontend/pages/conversor';
+import Analytic from './src/Frontend/pages/analytic';
 
-import FAB from './src/components/FAB';
-import Modal from './src/components/Modal';
+import FAB from './src/Frontend/components/FAB';
+import Modal from './src/Frontend/components/Modal';
+
+import Constants from './src/Frontend/constants';
 
 const Tab = createMaterialTopTabNavigator();
 
 const barStyle = {
-  activeTintColor: '#676CFB',
-  inactiveTintColor: '#BCBCBC',
-  indicatorStyle: { backgroundColor: '#676CFB' },
+  activeTintColor: Constants.theme.primary,
+  inactiveTintColor: Constants.theme.gray,
+  indicatorStyle: { backgroundColor: Constants.theme.primary },
 }
 
 const App = () => {

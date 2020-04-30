@@ -1,5 +1,9 @@
 export default Constants = {
-    themeColor: '#676CFB',
+    theme: {
+        primary: '#676CFB',
+        white: '#FFFFFF',
+        gray: '#9A9A9A',
+    },
     currencies: [
         {
             code: 'BRL',
@@ -33,6 +37,5 @@ export default Constants = {
         },
     ],
     favorites: [
-        'USD',
     ]
 }

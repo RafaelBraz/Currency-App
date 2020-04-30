@@ -4,21 +4,20 @@ import { Icon } from 'react-native-elements';
 
 import Select from '../select-button';
 
-import Context from '../../context';
+import Constants from '../../constants';
 import Style from './styles';
 
 const Modal = () => {
-    const Constants = useContext(Context);
 
     const SelectedFavorites = (props) => {
         return (
             <View style={{backgroundColor: Constants.themeColor, width: '80%', height: 60, marginBottom: 20, flexDirection: 'row', alignItems: 'center' }}>
                 <View style={{width: '80%', height: '100%', justifyContent: 'center', alignItems: 'center'}}>
-                    <Text style={{color: '#FFFFFF'}}>{`${props.currency.code} - ${props.currency.name}`}</Text>
+                    <Text style={{color: Constants.theme.white}}>{`${props.currency.code} - ${props.currency.name}`}</Text>
                 </View>
-                <View style={{width: 1, height: '80%', borderColor: '#FFFFFF', borderWidth: 1}} />
+                <View style={{width: 1, height: '80%', borderColor: Constants.theme.white, borderWidth: 1}} />
                 <View style={{width: '20%', height: '100%', justifyContent: 'center'}}>
-                    <Icon name='clear' color='#FFFFFF' />
+                    <Icon name='clear' color={Constants.theme.white} />
                 </View>
             </View>
         );

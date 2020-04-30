@@ -1,13 +1,12 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { View, Text, TextInput } from 'react-native';
 import { Icon } from 'react-native-elements';
 
 import Style from './styles';
 
-import Context from '../../context';
+import Constants from '../../constants';
 
-const SelectInput = (props) => {
-    const Constants = useContext(Context);
+const SelectInput = () => {
 
     const [displayOption, setDisplayOption] = useState(false);
     const [selectedOption, setSelectedOption] = useState(Constants.currencies[0]);
@@ -15,7 +14,7 @@ const SelectInput = (props) => {
     const Option = (props) => {
         const [style, setStyle] = useState({
             optionStyle: Style.option,
-            textColor: '#FFFFFF',
+            textColor: Constants.theme.white,
         });
 
         return (
@@ -24,13 +23,13 @@ const SelectInput = (props) => {
                 onTouchStart={() => {
                     setStyle({
                         optionStyle: Style.optionTouched,
-                        textColor: '#676CFB',
+                        textColor: Constants.theme.primary,
                     });
                 }}
                 onTouchEnd={() => {
                     setStyle({
                         optionStyle: Style.option,
-                        textColor: '#FFFFFF',
+                        textColor: Constants.theme.white,
                     });
                     setSelectedOption(Constants.currencies.filter(currency => currency.code === props.code)[0]);
                     setDisplayOption(false);
@@ -54,8 +53,8 @@ const SelectInput = (props) => {
                     style={Style.inputCurrency}
                     onTouchStart={() => { setDisplayOption(!displayOption) }}
                 >
-                    <Text style={{fontSize: 20, color: '#FFFFFF', marginRight: 10 }}>{selectedOption.code}</Text>
-                    <Icon name='expand-more' color='#FFFFFF' />
+                    <Text style={{fontSize: 20, color: Constants.theme.white, marginRight: 10 }}>{selectedOption.code}</Text>
+                    <Icon name='expand-more' color={Constants.theme.white} />
                 </View>
                 <TextInput
                     style={Style.inputValue} 
