@@ -1,0 +1,18 @@
+import { StyleSheet } from 'react-native';
+
+export default StyleSheet.create({
+    FAB: {
+        position: 'absolute',
+        right: 20,
+        bottom: 20,
+        width: 65,
+        height: 65,
+        borderRadius: 100,
+        borderColor: '#676CFB',
+        borderWidth: 1,
+        backgroundColor: '#FFFFFF',
+        alignItems: 'center',
+        justifyContent: 'center',
+    }
+
+});
