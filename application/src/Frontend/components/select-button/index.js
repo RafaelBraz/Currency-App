@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text } from 'react-native';
 import { Icon } from 'react-native-elements';
 
@@ -6,11 +6,16 @@ import Style from './styles';
 
 import Constants from '../../constants';
 
-const Select = () => {
+const Select = (selectProps) => {
     const [displayOption, setDisplayOption] = useState(false);
-    const [selectedOption, setSelectedOption] = useState(Constants.currencies[0]);
+    const [selectedOption, setSelectedOption] = useState(Constants.currencies.filter(currency => currency.code === selectProps.initialCode)[0]);
 
-    const Option = (props) => {
+    const setSelection = (selectedCurrency) => {
+        setSelectedOption(selectedCurrency);
+        selectProps.onValueChange(selectedCurrency.code);
+    };
+
+    const Option = (optionProps) => {
         const [style, setStyle] = useState({
             optionStyle: Style.option,
             textColor: Constants.theme.white,
@@ -30,11 +35,13 @@ const Select = () => {
                         optionStyle: Style.option,
                         textColor: Constants.theme.white,
                     });
-                    setSelectedOption(Constants.currencies.filter(currency => currency.code === props.code)[0]);
+                    
+                    setSelection(Constants.currencies.filter(currency => currency.code === optionProps.code)[0]);
+
                     setDisplayOption(false);
                 }}
             >
-                <Text style={{color: style.textColor}}>{`${props.code} - ${props.name}`}</Text>
+                <Text style={{color: style.textColor}}>{`${optionProps.code} - ${optionProps.name}`}</Text>
             </View>
         );
     };

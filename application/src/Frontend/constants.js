@@ -36,6 +36,4 @@ export default Constants = {
             valueInBRL: 1148.19,
         },
     ],
-    favorites: [
-    ]
 }

@@ -1,19 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { FlatList, View, Text } from 'react-native';
 
 import Title from '../../components/title';
 import QuoteBlock from '../../components/quote-block';
 
 import Constants from '../../constants';
+import { Context } from '../../../Datas/context';
 
 const Quote = () => {
+    const { baseCurrency, favorites } = useContext(Context);
     const [favoriteList, setFavoriteList] = useState([{title: true, code: '#'}]);
 
     useEffect(() => {
-        const favorites = Constants.currencies.filter( currency => Constants.favorites.includes(currency.code) );
-        setFavoriteList([{title: true, code: '#'}, ...favorites]);
-        console.log(favoriteList);
-    }, [Constants.favorites]);
+        const favoritesCurrencies = Constants.currencies.filter( currency => favorites.includes(currency.code) );
+        setFavoriteList([{title: true, code: '#'}, ...favoritesCurrencies]);
+    }, [favorites]);
 
     return (
         <View style={{height: '100%'}}>
@@ -23,7 +24,7 @@ const Quote = () => {
                     <Title text={`Cotação das\nmoedas favoritas`} /> 
                     :<QuoteBlock 
                         favorite={item.code}
-                        baseCurrency={'BRL'}
+                        baseCurrency={baseCurrency}
                         baseValue={item.valueInBRL}
                     />}
                 keyExtractor={item => item.code}

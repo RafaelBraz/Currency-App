@@ -1,5 +1,7 @@
 import { StyleSheet } from 'react-native';
 
+import Constants from '../../constants';
+
 export default StyleSheet.create({
     background: {
         position: 'absolute', 
@@ -11,25 +13,9 @@ export default StyleSheet.create({
     },
     modal: {
         width: '80%',
-        backgroundColor: '#FFFFFF',
+        backgroundColor: Constants.theme.white,
         alignItems: 'center',
-    },
-    text: {
-        width: '80%',
-        height: 60,
-        marginTop: 15,
-        marginBottom: 10,
-        fontSize: 16,
-        color: '#676CFB',
-        textAlign: 'center',
-        textAlignVertical: 'center',
-    },
-    newBlock: {
-        width: '80%',
-        height: 60,
-        marginBottom: 20,
-        borderColor: '#676CFB',
-        borderWidth: 1,
-        justifyContent: 'center',
+        paddingTop: 20,
+        paddingBottom: 20,
     },
 });

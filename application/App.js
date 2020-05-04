@@ -10,6 +10,9 @@ import Analytic from './src/Frontend/pages/analytic';
 
 import FAB from './src/Frontend/components/FAB';
 import Modal from './src/Frontend/components/Modal';
+import Config from './src/Frontend/components/Config';
+
+import DataContext from './src/Datas/context';
 
 import Constants from './src/Frontend/constants';
 
@@ -30,19 +33,25 @@ const App = () => {
 
   return (
     <NavigationContainer>
-      <Tab.Navigator tabBarOptions={barStyle}>
-        <Tab.Screen name="Quote" component={Quote} />
-        <Tab.Screen name="Conversor" component={Conversor} />
-        <Tab.Screen name="Analytic" component={Analytic} />
-      </Tab.Navigator>
-      
-      {
-        modalVisibility?
-        <Modal />
-        : null
-      }
-      <FAB changeModalVisibility={changeModalVisibility} />
+      <DataContext>
+        
+        <Tab.Navigator tabBarOptions={barStyle}>
+          <Tab.Screen name="Quote" component={Quote} />
+          <Tab.Screen name="Conversor" component={Conversor} />
+          <Tab.Screen name="Analytic" component={Analytic} />
+        </Tab.Navigator>
+        
+        {
+          modalVisibility?
+          <Modal>
+            <Config />
+          </Modal>
+          : null
+        }
 
+        <FAB changeModalVisibility={changeModalVisibility} />
+
+      </DataContext>
     </NavigationContainer>
   );
 };
