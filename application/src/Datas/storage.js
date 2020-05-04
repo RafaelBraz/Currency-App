@@ -1,32 +1,70 @@
-import {AsyncStorage} from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 
-const _storeData = async () => {
+const _setItem = async (key, value) => {
     try {
-        const response = await AsyncStorage.setItem('key', 'value');
+        const response = await AsyncStorage.setItem(key, value);
         return response;
-    } catch (err) {
-        return;
+    } catch(e) {
+        throw e;
     }
-};
+}
 
-const _loadData = async () => {
+const _getItem = async (key) => {
     try {
-        const response = await AsyncStorage.getItem('key');
-        if (response !== undefined) {
-            return response;
+        const response = await AsyncStorage.getItem(key);
+        return response;
+    } catch(e) {
+        throw e;
+    }
+}
+
+const _removeItem = async (key) => {
+    try {
+        const response = await AsyncStorage.removeItem(key);
+        return response;
+    } catch(e) {
+        throw e;
+    }
+}
+
+export const updateItem = async (key, value) => {
+    try {
+        await _removeItem(key);
+        if (key === 'favorites') {
+            await _setItem('favorites', JSON.stringify({"codes": value}));
         } else {
-            throw Error('Não foi possível adquirir o item');
+            await _setItem(key, value);
         }
-    } catch (err) {
-        return;
+        return 1;
+    } catch (e) {
+        throw e;
     }
-};
+}
 
-const _removeData = async () => {
+export const initBaseCurrency = async () => {
     try {
-        const response = await AsyncStorage.removeItem('key');
-        return response;
-    } catch (err) {
+        const baseCurrency = await _getItem('baseCurrency');
+        if(baseCurrency === null) {
+            await _setItem('baseCurrency', 'BRL');
+            return 'BRL';
+        } else {
+            return baseCurrency;
+        }
+    } catch(e) {
+        throw e;
+    }
+}
 
+export const initFavorites = async () => {
+    try {
+        const favorites = await _getItem('favorites');
+        if(favorites === null) {
+            await _setItem('favorites', JSON.stringify({"codes": []}));
+            return [];
+        } else {
+            return JSON.parse(favorites).codes;
+        }
+    } catch(e) {
+        throw e;
     }
 }
