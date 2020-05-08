@@ -1,24 +1,35 @@
 import React, { useState, useEffect } from 'react';
 
-import { initBaseCurrency, initFavorites, updateItem } from './storage';
+import { initBaseCurrency, initFavorites, initQuotes, updateItem } from './storage';
 
 export const Context = React.createContext(null);
 
 const DataContext = (props) => {
     const [baseCurrency, setBaseCurrency] = useState('BRL');
     const [favorites, setFavorites] = useState([]);
+    const [currenciesQuote, setCurrenciesQuote] = useState({
+        'BRL': 1,
+        'USD': 0,
+        'EUR': 0,
+        'GBP': 0,
+        'BTC': 0,
+        'ETH': 0,
+    });
 
     useEffect(() => {
 
         async function initialize() {
             const response_baseCurrency = await initBaseCurrency();
             const response_favorites = await initFavorites();
+            const response_quotes = await initQuotes();
 
             setBaseCurrency(response_baseCurrency);
             setFavorites(response_favorites);
+            setCurrenciesQuote(response_quotes);
 
             console.log(response_baseCurrency);
             console.log(response_favorites);
+            console.log(response_quotes);
         }
 
         initialize()
@@ -70,9 +81,20 @@ const DataContext = (props) => {
         }
     };
 
+    const getQuote = (currencyCode) => {
+        return currenciesQuote[currencyCode];
+    };
+
     return (
         <Context.Provider
-            value={{baseCurrency, favorites, addFavorite, removeFavorite, changeBaseCurrency}}    
+            value={{
+                baseCurrency, 
+                favorites, 
+                getQuote, 
+                addFavorite, 
+                removeFavorite, 
+                changeBaseCurrency, 
+            }}    
         >
             {props.children}
         </Context.Provider>

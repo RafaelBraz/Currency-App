@@ -32,6 +32,8 @@ export const updateItem = async (key, value) => {
         await _removeItem(key);
         if (key === 'favorites') {
             await _setItem('favorites', JSON.stringify({"codes": value}));
+        } else if(key === 'quotes') {
+            await _setItem('quotes', JSON.stringify(value));
         } else {
             await _setItem(key, value);
         }
@@ -65,6 +67,27 @@ export const initFavorites = async () => {
             return JSON.parse(favorites).codes;
         }
     } catch(e) {
+        throw e;
+    }
+}
+
+export const initQuotes = async () => {
+    try {
+        const quotes = await _getItem('quotes');
+        if(quotes === null) {
+            await _setItem('quotes', JSON.stringify({
+                'BRL': 1,
+                'USD': 0,
+                'EUR': 0,
+                'GBP': 0,
+                'BTC': 0,
+                'ETH': 0,
+            }));
+            return [];
+        } else {
+            return JSON.parse(quotes);
+        }
+    } catch (e) {
         throw e;
     }
 }

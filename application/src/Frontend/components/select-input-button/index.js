@@ -6,10 +6,9 @@ import Style from './styles';
 
 import Constants from '../../constants';
 
-const SelectInput = () => {
-
+const SelectInput = (parentProps) => {
     const [displayOption, setDisplayOption] = useState(false);
-    const [selectedOption, setSelectedOption] = useState(Constants.currencies[0]);
+    const [selectedOption, setSelectedOption] = useState(Constants.currencies.filter((currency) => currency.code === parentProps.initialCurrency)[0]);
 
     const Option = (props) => {
         const [style, setStyle] = useState({
@@ -42,10 +41,6 @@ const SelectInput = () => {
         );
     };
 
-    const textChange = (text) => {
-        console.log(`O texto mudou: ${text}`);
-    }
-
     return (
         <View style={Style.selectInputBlock}>
             <View style={Style.selectedBlock}>
@@ -58,9 +53,10 @@ const SelectInput = () => {
                 </View>
                 <TextInput
                     style={Style.inputValue} 
-                    keyboardType={'numeric'} 
-                    placeholder={'0'} 
-                    onChangeText={text => textChange(text || 0)}
+                    keyboardType={'numeric'}
+                    onChangeText={text => parentProps.onChangeValue(text || '0')}
+                    placeholder={'0'}
+                    value={parentProps.value}
                 />
             </View>
             {
