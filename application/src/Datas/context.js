@@ -9,11 +9,11 @@ const DataContext = (props) => {
     const [favorites, setFavorites] = useState([]);
     const [currenciesQuote, setCurrenciesQuote] = useState({
         'BRL': 1,
-        'USD': 0,
-        'EUR': 0,
-        'GBP': 0,
-        'BTC': 0,
-        'ETH': 0,
+        'USD': 1,
+        'EUR': 1,
+        'GBP': 1,
+        'BTC': 1,
+        'ETH': 1,
     });
 
     useEffect(() => {

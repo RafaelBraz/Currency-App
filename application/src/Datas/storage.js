@@ -77,11 +77,11 @@ export const initQuotes = async () => {
         if(quotes === null) {
             await _setItem('quotes', JSON.stringify({
                 'BRL': 1,
-                'USD': 0,
-                'EUR': 0,
-                'GBP': 0,
-                'BTC': 0,
-                'ETH': 0,
+                'USD': 1,
+                'EUR': 1,
+                'GBP': 1,
+                'BTC': 1,
+                'ETH': 1,
             }));
             return [];
         } else {

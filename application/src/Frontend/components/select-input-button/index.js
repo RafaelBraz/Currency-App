@@ -8,7 +8,6 @@ import Constants from '../../constants';
 
 const SelectInput = (parentProps) => {
     const [displayOption, setDisplayOption] = useState(false);
-    const [selectedOption, setSelectedOption] = useState(Constants.currencies.filter((currency) => currency.code === parentProps.initialCurrency)[0]);
 
     const Option = (props) => {
         const [style, setStyle] = useState({
@@ -30,7 +29,7 @@ const SelectInput = (parentProps) => {
                         optionStyle: Style.option,
                         textColor: Constants.theme.white,
                     });
-                    setSelectedOption(Constants.currencies.filter(currency => currency.code === props.code)[0]);
+                    parentProps.setSelectedOption(Constants.currencies.filter(currency => currency.code === props.code)[0].code);
                     setDisplayOption(false);
                 }}
             >
@@ -43,14 +42,21 @@ const SelectInput = (parentProps) => {
 
     return (
         <View style={Style.selectInputBlock}>
+            
             <View style={Style.selectedBlock}>
+                
                 <View
                     style={Style.inputCurrency}
                     onTouchStart={() => { setDisplayOption(!displayOption) }}
                 >
-                    <Text style={{fontSize: 20, color: Constants.theme.white, marginRight: 10 }}>{selectedOption.code}</Text>
+                    <Text 
+                        style={{ fontSize: 20, color: Constants.theme.white, marginRight: 10 }}
+                    >
+                        {parentProps.selectedOption}
+                    </Text>
                     <Icon name='expand-more' color={Constants.theme.white} />
                 </View>
+
                 <TextInput
                     style={Style.inputValue} 
                     keyboardType={'numeric'}
@@ -58,7 +64,9 @@ const SelectInput = (parentProps) => {
                     placeholder={'0'}
                     value={parentProps.value}
                 />
+
             </View>
+
             {
                 displayOption ?
                 <View style={Style.currencyOptionsBlock}>
