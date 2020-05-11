@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
-import { initBaseCurrency, initFavorites, initQuotes, updateItem } from './storage';
+import { initBaseCurrency, initFavorites, initQuotes, updateItem, getQuotes } from './storage';
+import { getCurrency } from './api';
 
 export const Context = React.createContext(null);
 
@@ -15,22 +16,45 @@ const DataContext = (props) => {
         'BTC': 1,
         'ETH': 1,
     });
+    const [lastUpdate, setLastUpdate] = useState(0);
+
+    const updateStateQuotes = async () => {
+        console.log('Atualizando cotações...');
+        let newQuotes = await getCurrency((Object.keys(currenciesQuote)).filter(code => {
+            return code !== 'BRL';
+        }));
+        console.log('cotações atualizadas: ', newQuotes);
+
+        let date = new Date();
+        let timestamp = date.getTime();
+
+        updateItem('quotes', newQuotes);
+        updateItem('lastUpdate', timestamp.toString());
+        
+        setCurrenciesQuote(newQuotes);
+        setLastUpdate(timestamp);
+    }
 
     useEffect(() => {
 
-        async function initialize() {
+        const initialize = async () => {
             const response_baseCurrency = await initBaseCurrency();
-            const response_favorites = await initFavorites();
-            const response_quotes = await initQuotes();
-
             setBaseCurrency(response_baseCurrency);
-            setFavorites(response_favorites);
-            setCurrenciesQuote(response_quotes);
-
             console.log(response_baseCurrency);
+
+            const response_favorites = await initFavorites();
+            setFavorites(response_favorites);
             console.log(response_favorites);
-            console.log(response_quotes);
-        }
+
+            const response_quotes = await initQuotes();
+            if(response_quotes === -1) {
+                await updateStateQuotes();
+            } else {
+                console.log('Cotações atualizadas recentemente.')
+                setCurrenciesQuote(response_quotes);
+                console.log(response_quotes);
+            }
+        };
 
         initialize()
 

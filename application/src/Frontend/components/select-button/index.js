@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { View, Text } from 'react-native';
 import { Icon } from 'react-native-elements';
 
@@ -77,4 +77,11 @@ const Select = (selectProps) => {
     );
 };
   
-  export default Select;
+export default Select;
+
+/**
+ * TODO:
+ * Implementar o método de digitação onde o input já vem com 0.00
+ * e ao digitar ele vai preenchendo da direita pra esquerda:
+ * 0.00 -> 0.01 -> 0.11 -> 1.11 -> 11.11
+ */

@@ -74,20 +74,45 @@ export const initFavorites = async () => {
 export const initQuotes = async () => {
     try {
         const quotes = await _getItem('quotes');
-        if(quotes === null) {
-            await _setItem('quotes', JSON.stringify({
+        const lastUpdate = await _getItem('lastUpdate');
+
+        if(quotes === null || lastUpdate === null) {
+            
+            let quotesObj = {
                 'BRL': 1,
                 'USD': 1,
                 'EUR': 1,
                 'GBP': 1,
                 'BTC': 1,
                 'ETH': 1,
-            }));
-            return [];
+            };
+
+            await _setItem('quotes', JSON.stringify(quotesObj));
+            await _setItem('lastUpdate', '0');
+
+            return quotesObj;
         } else {
-            return JSON.parse(quotes);
+            let date = new Date();
+            let timestamp = date.getTime();
+            
+            if((timestamp - parseInt(lastUpdate)) >= 180000) {
+                return -1;
+            }
+            else {
+                return JSON.parse(quotes);
+            }
         }
+
     } catch (e) {
+        throw e;
+    }
+}
+
+export const getQuotes = async () => {
+    try {
+        const quotes = await AsyncStorage.getItem('quotes');
+        return JSON.parse(quotes);
+    } catch(e) {
         throw e;
     }
 }
