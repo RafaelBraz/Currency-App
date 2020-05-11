@@ -1,4 +1,4 @@
-import React, { useContext, useState, useRef } from 'react';
+import React, { useContext, useState, useRef, useEffect } from 'react';
 import { View } from 'react-native';
 
 import Title from '../../components/title';
@@ -7,21 +7,25 @@ import SelectInput from '../../components/select-input-button';
 import { Context } from '../../../Datas/context';
 
 const Conversor = () => {
-    const { baseCurrency, getQuote } = useContext(Context);
+    const { baseCurrency, currenciesQuote } = useContext(Context);
 
     const [firstCurrencyCode, setFirstCurrencyCode] = useState(baseCurrency);
     const [secondCurrencyCode, setSecondCurrencyCode] = useState('USD');
 
-    const [proportion, setProportion] = useState(1/getQuote('USD'));
+    const [proportion, setProportion] = useState(1/currenciesQuote['USD']);
+    
+    useEffect(() => {
+        setProportion(currenciesQuote[firstCurrencyCode]/currenciesQuote[secondCurrencyCode]);
+    }, [currenciesQuote])
 
     const changeFirstCurrency = (newCurrencyCode) => {
         setFirstCurrencyCode(newCurrencyCode);
-        setProportion(getQuote(newCurrencyCode)/getQuote(secondCurrencyCode));
+        setProportion(currenciesQuote[newCurrencyCode]/currenciesQuote[secondCurrencyCode]);
     };
 
     const changeSecondCurrency = (newCurrencyCode) => {
         setSecondCurrencyCode(newCurrencyCode);
-        setProportion(getQuote(firstCurrencyCode)/getQuote(newCurrencyCode));
+        setProportion(currenciesQuote[firstCurrencyCode]/currenciesQuote[newCurrencyCode]);
     };
 
     const [firstValue, setFirstValue] = useState(null);

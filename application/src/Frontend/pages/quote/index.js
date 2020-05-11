@@ -8,7 +8,7 @@ import Constants from '../../constants';
 import { Context } from '../../../Datas/context';
 
 const Quote = () => {
-    const { baseCurrency, favorites, getQuote } = useContext(Context);
+    const { baseCurrency, favorites, currenciesQuote } = useContext(Context);
     const [favoriteList, setFavoriteList] = useState([{title: true, code: '#'}]);
 
     useEffect(() => {
@@ -25,7 +25,7 @@ const Quote = () => {
                     :<QuoteBlock 
                         favoriteCode={item.code}
                         baseCurrency={baseCurrency}
-                        baseValue={getQuote(item.code)}
+                        baseValue={currenciesQuote[item.code]}
                     />}
                 keyExtractor={item => item.code}
             />

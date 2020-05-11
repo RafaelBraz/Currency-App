@@ -16,7 +16,6 @@ const DataContext = (props) => {
         'BTC': 1,
         'ETH': 1,
     });
-    const [lastUpdate, setLastUpdate] = useState(0);
 
     const updateStateQuotes = async () => {
         console.log('Atualizando cotações...');
@@ -32,7 +31,6 @@ const DataContext = (props) => {
         updateItem('lastUpdate', timestamp.toString());
         
         setCurrenciesQuote(newQuotes);
-        setLastUpdate(timestamp);
     }
 
     useEffect(() => {
@@ -56,9 +54,9 @@ const DataContext = (props) => {
             }
         };
 
-        initialize()
+        initialize();
 
-    }, [])
+    }, []);
 
     const addFavorite = (currencyCode) => {
         if(favorites.length < 4) {
@@ -105,16 +103,12 @@ const DataContext = (props) => {
         }
     };
 
-    const getQuote = (currencyCode) => {
-        return currenciesQuote[currencyCode];
-    };
-
     return (
         <Context.Provider
             value={{
                 baseCurrency, 
                 favorites, 
-                getQuote, 
+                currenciesQuote, 
                 addFavorite, 
                 removeFavorite, 
                 changeBaseCurrency, 

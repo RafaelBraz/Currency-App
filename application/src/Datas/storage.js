@@ -90,7 +90,7 @@ export const initQuotes = async () => {
             await _setItem('quotes', JSON.stringify(quotesObj));
             await _setItem('lastUpdate', '0');
 
-            return quotesObj;
+            return -1;
         } else {
             let date = new Date();
             let timestamp = date.getTime();
