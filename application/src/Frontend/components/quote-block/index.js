@@ -13,7 +13,7 @@ const QuoteBlock = (props) => {
             <View style={Style.quote}>
                 <Text style={Style.quoteText}>{`${props.favoriteCode} 1`}</Text>
                 <View style={Style.divisor}/>
-                <Text style={Style.quoteText}>{`${props.baseCurrency} ${props.baseValue}`}</Text>
+                <Text style={Style.quoteText}>{`${props.baseCurrency} ${parseFloat(props.baseValue).toFixed(2)}`}</Text>
             </View>
             <View style={Style.favorite} onTouchEnd={
                 () => { removeFavorite(props.favoriteCode) }

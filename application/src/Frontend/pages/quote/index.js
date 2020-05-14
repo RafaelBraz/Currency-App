@@ -16,8 +16,12 @@ const Quote = () => {
         setFavoriteList([{title: true, code: '#'}, ...favoritesCurrencies]);
     }, [favorites]);
 
+    const calculateQuote = (baseCurrency, quote) => {
+        return currenciesQuote[quote]/currenciesQuote[baseCurrency];
+    };
+
     return (
-        <View style={{height: '100%'}}>
+        <View style={{height: '100%', backgroundColor: Constants.theme.backgroud}}>
             <FlatList
                 data={favoriteList}
                 renderItem={({item}) => item.title ? 
@@ -25,7 +29,7 @@ const Quote = () => {
                     :<QuoteBlock 
                         favoriteCode={item.code}
                         baseCurrency={baseCurrency}
-                        baseValue={currenciesQuote[item.code]}
+                        baseValue={calculateQuote(baseCurrency, item.code)}
                     />}
                 keyExtractor={item => item.code}
             />
