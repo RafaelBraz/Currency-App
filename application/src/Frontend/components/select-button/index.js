@@ -78,10 +78,3 @@ const Select = (selectProps) => {
 };
   
 export default Select;
-
-/**
- * TODO:
- * Implementar o método de digitação onde o input já vem com 0.00
- * e ao digitar ele vai preenchendo da direita pra esquerda:
- * 0.00 -> 0.01 -> 0.11 -> 1.11 -> 11.11
- */

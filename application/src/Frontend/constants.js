@@ -1,6 +1,7 @@
 export default Constants = {
     theme: {
         backgroud: '#EFEFEF',
+        modalBackground: '#00000088',
         primary: '#676CFB',
         primaryRGBA: 'rgba(103, 108, 251, 1)',
         white: '#FFFFFF',

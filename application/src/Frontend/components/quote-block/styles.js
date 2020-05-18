@@ -1,20 +1,24 @@
 import { StyleSheet } from 'react-native';
 
+import Constants from '../../constants';
+
 export default StyleSheet.create({
     block: {
-        width: '80%',
+        width: '85%',
         height: 170,
         alignSelf: 'center',
-        backgroundColor: '#676CFB',
-        marginBottom: 30,
+        backgroundColor: Constants.theme.primary,
+        marginBottom: 15,
         flexDirection: 'row',
+
+        elevation: 7,
     },
     quote: {
-        width: '70%',
+        width: '80%',
         height: '100%',      
     },
     favorite: {
-        width: '30%',
+        width: '20%',
         height: '100%',
         alignItems: 'flex-end',
         padding: 5,
@@ -24,13 +28,13 @@ export default StyleSheet.create({
         alignSelf: 'center',
         textAlignVertical: 'center',
         fontSize: 32,
-        color: '#FFFFFF',
+        color: Constants.theme.white,
     },
     divisor: {
         width: '80%',
         height: 1,
         alignSelf: 'center',
-        borderColor: '#FFFFFF',
+        borderColor: Constants.theme.white,
         borderWidth: 1,
     },
 });

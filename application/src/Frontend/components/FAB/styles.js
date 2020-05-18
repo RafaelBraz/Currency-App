@@ -1,5 +1,7 @@
 import { StyleSheet } from 'react-native';
 
+import Constants from '../../constants';
+
 export default StyleSheet.create({
     FAB: {
         position: 'absolute',
@@ -8,11 +10,13 @@ export default StyleSheet.create({
         width: 65,
         height: 65,
         borderRadius: 100,
-        borderColor: '#676CFB',
+        borderColor: Constants.theme.primary,
         borderWidth: 1,
-        backgroundColor: '#FFFFFF',
+        backgroundColor: Constants.theme.white,
         alignItems: 'center',
         justifyContent: 'center',
+
+        elevation: 2, 
     }
 
 });

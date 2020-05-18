@@ -7,7 +7,7 @@ export default StyleSheet.create({
         position: 'absolute', 
         width: '100%', 
         height: '100%', 
-        backgroundColor: '#00000088',
+        backgroundColor: Constants.theme.modalBackground,
         justifyContent: 'center',
         alignItems: 'center',
     },

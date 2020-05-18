@@ -32,17 +32,29 @@ const Conversor = () => {
     const [secondValue, setSecondValue] = useState(null);
 
     const changeFirst = (value) => {
-        let converted = parseFloat(value*proportion).toFixed(2);
-
+        
         setFirstValue(value);
-        setSecondValue(converted.toString())
+        
+        if(value === '') {
+            setSecondValue(value);
+        } else {
+            let converted = parseFloat(value*proportion).toFixed(2);
+            setSecondValue(converted.toString());
+        }   
+             
     }
 
     const changeSecond = (value) => {
-        let converted = parseFloat(value/proportion).toFixed(2);
+        
+        if(value === '') {
+            setFirstValue(value);
+        } else {
+            let converted = parseFloat(value/proportion).toFixed(2);
+            setFirstValue(converted.toString());
+        }
 
-        setFirstValue(converted.toString());
-        setSecondValue(value)
+        setSecondValue(value);
+
     }
 
     return (
@@ -69,3 +81,10 @@ const Conversor = () => {
 }
 
 export default Conversor;
+
+/**
+ * //TODO:
+ * Implementar o método de digitação onde o input já vem com 0.00
+ * e ao digitar ele vai preenchendo da direita pra esquerda:
+ * 0.00 -> 0.01 -> 0.11 -> 1.11 -> 11.11
+ */

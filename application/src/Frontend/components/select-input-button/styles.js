@@ -1,5 +1,7 @@
 import { StyleSheet } from 'react-native';
 
+import Constants from '../../constants';
+
 export default StyleSheet.create({
     selectInputBlock: {
         width: '80%',
@@ -9,7 +11,7 @@ export default StyleSheet.create({
     selectedBlock: {
         height: 90,
         flexDirection: 'row',
-        borderColor: '#676CFB',
+        borderColor: Constants.theme.primary,
         borderWidth: 1,
     },
     inputCurrency: {
@@ -17,8 +19,8 @@ export default StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#676CFB',
-        borderColor: '#676CFB',
+        backgroundColor: Constants.theme.primary,
+        borderColor: Constants.theme.primary,
         borderRightWidth: 1,
     },
     inputValue: {
@@ -26,7 +28,7 @@ export default StyleSheet.create({
         height: 90,
         paddingRight: 30,
         fontSize: 20,
-        color: '#676CFB',
+        color: Constants.theme.primary,
         textAlign: 'right',
         textAlignVertical: 'center',
     },
@@ -34,7 +36,7 @@ export default StyleSheet.create({
         width: '35%',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#676CFB',
+        backgroundColor: Constants.theme.primary,
         paddingTop: 10,
     },
     option: {
@@ -43,8 +45,8 @@ export default StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         marginBottom: 10,
-        borderTopColor: '#FFFFFF',
-        borderBottomColor: '#FFFFFF',
+        borderTopColor: Constants.theme.white,
+        borderBottomColor: Constants.theme.white,
         borderTopWidth: 1,
         borderBottomWidth: 1,
     },
@@ -54,6 +56,6 @@ export default StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         marginBottom: 10,
-        backgroundColor: '#FFFFFF',
+        backgroundColor: Constants.theme.white,
     },
 });

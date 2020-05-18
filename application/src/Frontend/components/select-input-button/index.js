@@ -60,7 +60,7 @@ const SelectInput = (parentProps) => {
                 <TextInput
                     style={Style.inputValue} 
                     keyboardType={'numeric'}
-                    onChangeText={text => parentProps.onChangeValue(text || '0')}
+                    onChangeText={text => parentProps.onChangeValue(text || '')}
                     placeholder={'0'}
                     value={parentProps.value}
                 />

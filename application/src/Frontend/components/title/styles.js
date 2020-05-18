@@ -1,5 +1,7 @@
 import { StyleSheet } from 'react-native';
 
+import Constants from '../../constants';
+
 export default StyleSheet.create({
     block: { 
         width: '100%',
@@ -10,7 +12,7 @@ export default StyleSheet.create({
     },
     title: {
         fontSize: 28,
-        color: '#676CFB',
+        color: Constants.theme.primary,
         textAlign: 'center',
     },
 });

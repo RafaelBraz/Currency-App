@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { View, Text } from 'react-native';
 import { Icon } from 'react-native-elements';
 
 import Constants from '../../../constants';
+import { Context } from '../../../../Datas/context';
 
 import Style from './styles';
 
 const NewFavorite = (parentProps) => {
+    const { baseCurrency, favorites } = useContext(Context);
     const [optionsOpen, setOptionsOpen] = useState(false);
 
     const Option = (optionProps) => {
@@ -25,15 +27,32 @@ const NewFavorite = (parentProps) => {
     return (
         <View>
             <View style={Style.newBlock} onTouchEnd={
-                () => { setOptionsOpen(true) }
+                () => { setOptionsOpen(!optionsOpen) }
             }>
-                <Icon name='add' color={Constants.theme.primary} />
+                {
+                    optionsOpen ?
+                    <Icon name='expand-less' color={Constants.theme.primary} />
+                    : <Icon name='add' color={Constants.theme.primary} />
+                }
             </View>
             {
                 optionsOpen ?
                 <View style={Style.optionContent}>
                     {
-                        Constants.currencies.map(currency => <Option name={currency.name} key={currency.code} code={currency.code} onSelectOption={parentProps.addFavorite} />)
+                        Constants.currencies.map(currency => 
+                            (
+                                (currency.code === baseCurrency) ?
+                                null
+                                : favorites.includes(currency.code) ?
+                                    null
+                                    : <Option 
+                                        name={currency.name} 
+                                        key={currency.code} 
+                                        code={currency.code} 
+                                        onSelectOption={parentProps.addFavorite}
+                                    />
+                            )
+                        )
                     }
                 </View>
                 : null

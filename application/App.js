@@ -43,7 +43,7 @@ const App = () => {
         
         {
           modalVisibility?
-          <Modal>
+          <Modal changeModalVisibility={changeModalVisibility}>
             <Config />
           </Modal>
           : null

@@ -1,5 +1,7 @@
 import { StyleSheet } from 'react-native';
 
+import Constants from '../../constants';
+
 export default StyleSheet.create({
     selectBlock: {
         width: '80%',
@@ -7,21 +9,21 @@ export default StyleSheet.create({
     },
     selectedBlock: {
         height: 60,
-        backgroundColor: '#676CFB',
+        backgroundColor: Constants.theme.primary,
         flexDirection: 'row',        
     },
     optionsBlock: {
         marginTop: 5,
         paddingTop: 15,
-        backgroundColor: '#676CFB',
+        backgroundColor: Constants.theme.primary,
     },
     option: {
         height: 60,
         justifyContent: 'center',
         paddingLeft: 20,
         marginBottom: 15,
-        borderTopColor: '#FFFFFF',
-        borderBottomColor: '#FFFFFF',
+        borderTopColor: Constants.theme.white,
+        borderBottomColor: Constants.theme.white,
         borderTopWidth: 1,
         borderBottomWidth: 1,
     },
@@ -30,7 +32,7 @@ export default StyleSheet.create({
         justifyContent: 'center',
         paddingLeft: 20,
         marginBottom: 15,
-        backgroundColor: '#FFFFFF',
+        backgroundColor: Constants.theme.white,
     },
     inputTitle: {
         width: '80%',
@@ -42,8 +44,8 @@ export default StyleSheet.create({
         width: 0.5,
         height: 50,
         marginTop: 5,
-        backgroundColor: '#FFFFFF',
-        borderColor: '#FFFFFF',
+        backgroundColor: Constants.theme.white,
+        borderColor: Constants.theme.white,
         borderWidth: 0.5,
     },
     inputListIcon: {

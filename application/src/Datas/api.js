@@ -12,11 +12,11 @@ export const getCurrency = async (codes) => {
     console.log(URL_API);
 
     // Faz a requisição das cotações
-    let quotes = {};
     const response = await fetch(URL_API);
     const result = await response.json();
 
-    // Modela objeto com as cotações de cada moeda
+    // Cria objeto com as cotações de cada moeda
+    let quotes = {};
     Object.keys(result).forEach(currency => {
         quotes[currency] = parseFloat(result[currency].bid)
     });
@@ -36,6 +36,7 @@ export const getLastDaysQuote = async (currency, numberOfDays = 7) => {
     const response = await fetch(URL_API);
     const result = await response.json();
 
+    // Cria um objeto com apenas as cotações diárias da moeda selecionada
     let quotes = [];
     result.forEach(day => {
         quotes.push(parseFloat(day.bid));
