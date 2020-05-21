@@ -3,7 +3,7 @@ import { View } from 'react-native';
 
 import Title from '../../components/title';
 import Select from '../../components/select-button';
-import Chart from './Chart';
+import Chart from '../../components/Chart';
 
 import { Context } from '../../../Datas/context';
 import { getLastDaysQuote } from '../../../Datas/api';
@@ -24,28 +24,26 @@ const Months = {
     'Dec': { number: 12, days: 31, lastMonth: 'Nov', },
 }
 
-const calculateLastDays = (todayDay, todayMonth, numberOfDays=7) => {
+const zeroPad = (num, places) => String(num).padStart(places, '0');
 
-    const zeroPad = (num, places) => String(num).padStart(places, '0');
+const calculateLastDays = (todayDay, todayMonth, numberOfDays=7) => {
 
     const printMonth = (month, number=true) => { return number ? zeroPad(Months[month].number, 2) : month };
 
     let days = [];
-    for (let i = (numberOfDays - 1); i > 1; i--) { // Foram retiradas as iterações 0 e 1 pois elas representam, respectivamente, "hoje" e "ontem"
+    for (let i = (numberOfDays - 1); i >= 0; i--) { // Foram retiradas as iterações 0 e 1 pois elas representam, respectivamente, "hoje" e "ontem"
         if(todayDay - i <= 0) {
             days.push(`${zeroPad(Months[Months[todayMonth].lastMonth].days + (todayDay - i), 2)}/${printMonth(Months[todayMonth].lastMonth)}`);
         } else {
             days.push(`${zeroPad(todayDay - i, 2)}/${printMonth(todayMonth)}`);
         }
     }
-    days.push('ontem');
-    days.push('hoje');
 
     return days;
 };
 
 const Analytic = () => {
-    const { baseCurrency, currenciesQuote } = useContext(Context);
+    const { baseCurrency } = useContext(Context);
 
     const [chartData, setChartData] = useState({
         labels: lastDays,
@@ -71,10 +69,9 @@ const Analytic = () => {
                     },
                 ],
             });
-        } else {
-            
-            let baseQuotesInBRL = Array(7).fill(1);
-            if (baseCurrency !== 'BRL') {
+        } else {            
+            let baseQuotesInBRL = Array(7).fill({"value": 1, timestamp: 0});
+            if (baseCurrency !== 'BRL') { 
                 baseQuotesInBRL = await getLastDaysQuote(baseCurrency, 7);
             }
             
@@ -84,12 +81,26 @@ const Analytic = () => {
             }
 
             let quotes = [];
+            let days = [];
             for (let i = 0; i < quotesInBRL.length; i++) {
-                quotes.push(quotesInBRL[i]/baseQuotesInBRL[i]);
+                if(currencyCode !== 'BRL') {
+                    let date = new Date(quotesInBRL[i].timestamp * 1000);
+                    
+                    let date_arr = date.toDateString().split(' ');
+
+                    days.unshift(`${date_arr[2]}/${zeroPad(Months[date_arr[1]].number, 2)}`);
+                } else if (baseCurrency !== 'BRL') {
+                    let date = new Date(baseQuotesInBRL[i].timestamp * 1000);
+
+                    let date_arr = date.toDateString().split(' ');
+
+                    days.unshift(`${date_arr[2]}/${zeroPad(Months[date_arr[1]].number, 2)}`);
+                } 
+                quotes.unshift(quotesInBRL[i].value/baseQuotesInBRL[i].value);
             }
 
             setChartData({
-                labels: lastDays,
+                labels: days,
                 datasets: [
                     {
                         data: quotes,

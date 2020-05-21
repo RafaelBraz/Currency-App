@@ -39,7 +39,10 @@ export const getLastDaysQuote = async (currency, numberOfDays = 7) => {
     // Cria um objeto com apenas as cotações diárias da moeda selecionada
     let quotes = [];
     result.forEach(day => {
-        quotes.push(parseFloat(day.bid));
+        quotes.push({
+            "value": parseFloat(day.bid),
+            "timestamp": day.timestamp,
+        });
     });
 
     return quotes;
