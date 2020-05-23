@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { View } from 'react-native';
+import { View, ScrollView } from 'react-native';
 
 import Title from '../../components/title';
 import Select from '../../components/select-button';
@@ -112,12 +112,12 @@ const Analytic = () => {
     };
 
     return (
-        <View style={{height: '100%', backgroundColor: Constants.theme.backgroud}}>
+        <ScrollView style={{height: '100%', backgroundColor: Constants.theme.backgroud}}>
             <Title text={'Análise temporal'} />
             <Select initialCode={baseCurrency} onValueChange={configChart} />
 
             <Chart data={chartData}/>
-        </View>
+        </ScrollView>
     );
 };
 

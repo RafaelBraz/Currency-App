@@ -1,5 +1,5 @@
 import React, { useContext, useState, useRef, useEffect } from 'react';
-import { View } from 'react-native';
+import { ScrollView } from 'react-native';
 
 import Title from '../../components/title';
 import SelectInput from '../../components/select-input-button';
@@ -58,7 +58,7 @@ const Conversor = () => {
     }
 
     return (
-        <View style={{height: '100%', backgroundColor: Constants.theme.backgroud}}>
+        <ScrollView style={{height: '100%', backgroundColor: Constants.theme.backgroud}}>
             
             <Title text={`Calculadora\nde conversão`} />
             
@@ -76,7 +76,7 @@ const Conversor = () => {
                 onChangeValue={changeSecond} 
             />
 
-        </View>
+        </ScrollView>
     );
 }
 

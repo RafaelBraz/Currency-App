@@ -36,9 +36,9 @@ const App = () => {
       <DataContext>
         
         <Tab.Navigator tabBarOptions={barStyle}>
-          <Tab.Screen name="Quote" component={Quote} />
+          <Tab.Screen name="Cotação" component={Quote} />
           <Tab.Screen name="Conversor" component={Conversor} />
-          <Tab.Screen name="Analytic" component={Analytic} />
+          <Tab.Screen name="Análise" component={Analytic} />
         </Tab.Navigator>
         
         {

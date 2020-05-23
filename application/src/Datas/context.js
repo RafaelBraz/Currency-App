@@ -5,6 +5,12 @@ import { getCurrency } from './api';
 
 export const Context = React.createContext(null);
 
+
+/**
+ * Componente representando o contexto que é geral para a aplicação,
+ * provendo as funções necessárias para seu funcionamento e mantendo
+ * a cache da aplicação sempre atualizada
+ */
 const DataContext = (props) => {
     const [baseCurrency, setBaseCurrency] = useState('BRL');
     const [favorites, setFavorites] = useState([]);
@@ -97,6 +103,8 @@ const DataContext = (props) => {
             setBaseCurrency(newBaseCurrency);
             console.log(`Change base currency to ${newBaseCurrency}`);
         } catch (e) {
+            // Caso ocorra algum erro durante a atualização da moeda base
+            // retorna ao estado anterior
             updateItem('baseCurrency', currentBaseCurrency);
             setBaseCurrency(currentBaseCurrency);
             console.log(`Error: ${e}`);

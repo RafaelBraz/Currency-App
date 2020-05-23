@@ -1,5 +1,4 @@
-export const getCurrency = async (codes) => {
-    
+export const getCurrency = async (codes) => {   
     // Monta a URL de acordo com as moedas selecionadas para a aplicação
     var URL_API = "https://economia.awesomeapi.com.br/all/";
     for(let i = 0; i < codes.length; i++) {
@@ -27,7 +26,6 @@ export const getCurrency = async (codes) => {
 };
 
 export const getLastDaysQuote = async (currency, numberOfDays = 7) => {
-
     // Monta a URL com a moeda selecionada e com o número de dias dado
     var URL_API = `https://economia.awesomeapi.com.br/json/daily/${currency}-BRL/${numberOfDays}`;
     console.log(URL_API);
@@ -36,7 +34,7 @@ export const getLastDaysQuote = async (currency, numberOfDays = 7) => {
     const response = await fetch(URL_API);
     const result = await response.json();
 
-    // Cria um objeto com apenas as cotações diárias da moeda selecionada
+    // Cria um objeto com apenas as cotações da última semana da moeda selecionada
     let quotes = [];
     result.forEach(day => {
         quotes.push({
